@@ -8,8 +8,7 @@ $(document).ready(function(){
 $("#b").click(function(){
     var from = document.getElementById("origin").value;  
     var to = document.getElementById("destination").value;  
-    var url="https://maps.googleapis.com/maps/api/directions/json?origin="+from+"&destination="+to+"&key=AIzaSyArqcS_MwgL1kr97ZnMS2nI6Cyu3_Dpx0s";
-   
+    
 
     $.getJSON(("lab.jsp"),{origin:from,des:to},function (data) 
     {

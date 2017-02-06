@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.io.*,java.net.*,org.json.simple.*"
- contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
+ contentType="application/json;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 StringBuffer json=new StringBuffer();  
 String from=request.getParameter("origin");
