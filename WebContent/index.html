@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>   
+<script type="text/javascript">
+   
+$(document).ready(function(){
+$("#b").click(function(){
+    var from = document.getElementById("origin").value;  
+    var to = document.getElementById("destination").value;  
+    var url="https://maps.googleapis.com/maps/api/directions/json?origin="+from+"&destination="+to+"&key=AIzaSyArqcS_MwgL1kr97ZnMS2nI6Cyu3_Dpx0s";
+   
+
+    $.getJSON(("lab.jsp"),{origin:from,des:to},function (data) 
+    {
+    	if(data.status=="OK")
+    	{
+    	var output="";
+        var distance=(data.routes[0].legs[0].distance.text).toString();
+        var time=(data.routes[0].legs[0].duration.text).toString();
+        $('#parsed').empty();
+        $('#parsed').append("<p>The total distance is <b> "+distance+"</b></p>");
+        $('#parsed').append("<p>The estimated driving time is <b>"+time+"</b></p>");
+        $('#parsed').append("<p>Driving Instructions</p>");
+       
+        var steps=data.routes[0].legs[0].steps;
+        $.each(steps,function(index,value){
+        	$('#parsed').append("<li>"+(value.html_instructions).toString()+"</li>");
+        }); 
+    	}
+    	else
+    	{
+    		$('#parsed').empty();
+    		$('#parsed').append("<p>Information can not be found :(</p>");
+    	}
+    });
+
+});
+});
+
+</script>  
+</head>
+
+
+ <body>  
+   <form method="get">  
+     <p>from : <input type="text"  id="origin" value="" /></p> 
+     <p>to : <input type="text"  id="destination" value="" /></p>
+     <input type="button" id="b" value = "Query!">  
+     </form>
+     <div id="url"> </div>  
+     <div id="parsed"> </div>
+ </body>  
+ </html>
